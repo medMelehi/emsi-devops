@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#this script allow us to authentificat to my server using the the SSH private key 
+ ssh-copy-id -i ~/.ssh/holberton ubuntu@35.237.66.234
+ssh ubuntu@35.237.66.234
+
