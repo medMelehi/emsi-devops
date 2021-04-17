@@ -2,8 +2,8 @@
 #this script is installin nginx in configure port 80 and editing the intex file to return string
 sudo apt-get update -y
 sudo apt-get install nginx -y
-sudo chmod a+rw /var/www/html/index*
-echo "Holberton School" > /var/www/html/index*
+sudo chmod a+rw /var/www/html/index.nginx-debian.html
+echo 'Holberton School' > /var/www/html/index.nginx-debian.html
 sudo awk '{if (match($1,var)) gsub(/[0-9]+/,"80"); print $0;}' var="listen" /etc/nginx/sites-enabled/default > tmp && sudo mv tmp /etc/nginx/sites-enabled/default
 sudo service nginx reload 
 
