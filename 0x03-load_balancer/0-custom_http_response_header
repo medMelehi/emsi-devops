@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 #this script will add a http response header string 
-new_string="add_header  X-Served-By  3-web-01;\n# First attempt to serve request as file, then"
+new_string="add_header  X-Served-By  $\hostname;\n# First attempt to serve request as file, then"
 ssh ubuntu@35.231.236.13 "sudo sed -i \"s/# First attempt to serve request as file, then/${new_string}/\" /etc/nginx/sites-enabled/default && sudo service nginx restart "
-new_string1="add_header  X-Served-By  3-web-02;\n# First attempt to serve request as file, then"
-new_string2="server_name _;\nlocation \/redirect_me {\nreturn 301 'https:\/\/www.youtube.com\/watch?v=lTRiuFIWV54';\n}\n"
-new_string3="server_name _;\nerror_page 404 \/error_404.html;\n"
-ssh ubuntu@35.231.53.147 "sudo apt-get update -y && sudo apt-get install nginx -y &&  echo \"Holberton School\" |sudo tee /var/www/html/index.nginx-debian.html > /dev/null && sudo touch /var/www/html/error_404.html && echo \"Ceci n'est pas une page\" | sudo tee /var/www/html/error_404.html > /dev/null && sudo sed -i \"s/server_name _;/${new_string2}/\" /etc/nginx/sites-enabled/default && sudo sed -i \"s/server_name _;/${new_string3}/\" /etc/nginx/sites-enabled/default && sudo sed -i \"s/# First attempt to serve request as file, then/${new_string1}/\" /etc/nginx/sites-enabled/default && sudo service nginx restart "
+new_string1="add_header  X-Served-By  $\hostname;\n# First attempt to serve request as file, then"
+ssh ubuntu@35.231.53.147 "sudo sed -i \"s/# First attempt to serve request as file, then/${new_string1}/\" /etc/nginx/sites-enabled/default && sudo service nginx restart "
 
