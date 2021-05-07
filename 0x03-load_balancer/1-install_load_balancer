@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 # install haproxy and congigure it
-sudo apt-get update -y 
-sudo apt-get install haproxy -y
+sudo apt-get update
+sudo apt-get -y install software-properties-common
+sudo add-apt-repository -y ppa:vbernat/haproxy-2.0
+sudo apt-get update
+sudo apt-get -y install haproxy=2.0.\*
 new_string=$'\n
 frontend load-banlancer\n
 \tbind *:80\n
