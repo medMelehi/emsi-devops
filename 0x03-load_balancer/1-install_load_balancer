@@ -3,7 +3,7 @@
 sudo apt-get update -y 
 sudo apt-get install haproxy -y
 new_string=$'\n
-frontend http\n
+frontend load-banlancer\n
 \tbind *:80\n
 \tmode http\n
 \tdefault_backend web-backend\n
