@@ -5,13 +5,16 @@ sudo apt-get -y install software-properties-common
 sudo add-apt-repository -y ppa:vbernat/haproxy-2.0
 sudo apt-get update
 sudo apt-get -y install haproxy=2.0.\*
-echo "frontend load-banlancer
-    bind *:80
-    mode http
-    default_backend web-backend" >> /etc/haproxy/haproxy.cfg
-echo "backend web-backend
-    balance roundrobin
-    server 3123-web-01 35.237.154.2:80 check
-    server 3123-web-02 34.73.23.220:80 check" >> /etc/haproxy/haproxy.cfg
+STR=$'\n
+frontend http_front\n
+    \tbind *:80\n
+    \tdefault_backend web-backend\n
+backend web-backend\n
+    \tbalance roundrobin\n
+    \tserver 3123-web-01 35.237.154.2:80 check\n
+    server 3123-web-02 34.73.23.220:80 check'
+echo "$STR" |sudo tee -a /etc/haproxy/haproxy.cfg
+STR1=$'ENABLED=1'
+echo "$STR1" |sudo tee -a /etc/default/haproxy
 sudo service haproxy restart
 
