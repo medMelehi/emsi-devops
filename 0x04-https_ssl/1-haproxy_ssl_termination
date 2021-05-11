@@ -37,6 +37,7 @@ frontend http_front
 
     	bind *:80
 	bind :443 ssl crt /etc/letsencrypt/live/www.check-it.tech/all.pem
+	reqadd X-Forwarded-Proto:\ https
     	default_backend web-backend
 
 backend web-backend
