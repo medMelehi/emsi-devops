@@ -31,12 +31,19 @@ defaults
 	errorfile 502 /etc/haproxy/errors/502.http
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
+	
+	option forwardfor
+        option http-server-close
 
-
-frontend https_front
+frontend http_front
 
     	bind *:80
-	bind *:443 ssl crt /etc/letsencrypt/live/www.check-it.tech/all.pem
+	reqadd X-Forwarded-Proto:\ http
+    	default_backend web-backend
+    	
+frontend https_front
+
+	bind *:443 ssl crt /etc/haproxy/certs/www.check-it.tech.pem
 	reqadd X-Forwarded-Proto:\ https
     	default_backend web-backend
 
