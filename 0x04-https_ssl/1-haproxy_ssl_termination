@@ -33,10 +33,10 @@ defaults
 	errorfile 504 /etc/haproxy/errors/504.http
 
 
-frontend http_front
+frontend https_front
 
     	bind *:80
-	bind :443 ssl crt /etc/letsencrypt/live/www.check-it.tech/all.pem
+	bind *:443 ssl crt /etc/letsencrypt/live/www.check-it.tech/all.pem
 	reqadd X-Forwarded-Proto:\ https
     	default_backend web-backend
 
@@ -44,6 +44,6 @@ backend web-backend
 
     	balance roundrobin
 
-    	server 3132-web-01 35.231.236.13:80 
+    	server 3132-web-01 35.231.236.13:80 check
 
-    server 3132-web-02 35.231.53.147:80
+    server 3132-web-02 35.231.53.147:80 check
